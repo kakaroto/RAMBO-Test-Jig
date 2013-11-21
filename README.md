@@ -33,3 +33,38 @@ Install clamps to the top board, and test the system.
 Hold the motors with the motor_mount, and attach the opto endstop to the opto mount and attach it to the motor. insert the encoder in the motor, and screw everything to the wooden plaque.
 Use a RAMBo as controller, remove all resistors/capacitors from the thermistor area, and connect everything.
 Use 4.7KOhm and 47KOhm resistors as voltage divider for your supply rail tests, and a 100KOhm resistor for the thermistor tests.
+
+# Pin mapping
+Endstops :
+ Xmin to EXT2-10
+ Ymin to EXT2-12 
+ Zmin to EXT2-14 
+ Xmax to EXT2-16 
+ Ymax to EXT2-18  
+ Zmax to EXT2-20 
+Mosfets :
+ Heat0 to MX3-4
+ Fan0 to MX3-5
+ Heat1 to MX2-4
+ Fan1 to MX2-5
+ Heat-Bed to MX1-5
+ Fan2 to MX1-4
+VRefs:
+ XRef to Analog-Ext-8
+ YRef to Analog-EXT-6
+ ZRef to Analog-EXT-5
+ E0-Ref to Analog-EXT-4
+ E1-Ref to Analog-EXT-3
+Supply voltage:
+ Extruder rail (Heat0+) to T3
+ Bed rail (Heat-Bed+) to T2
+ 5V rail (VCC middle pin of power selector jumper) to T0
+For the supply voltage, we need a 47KOhm resistor between VCC and Tx and a 4.7KOhm resistor between Tx and the ground (R1, R2 according to Ohm's law to get a divider of voltage of 0.91)
+Thermistor connectors connected to a 100KOhm resistor
+Motors connected to normal motors
+Opto-endstops for controller :
+ X opto endstop to EXT2-9
+ Y opto endstop to EXT2-11
+ Z opto endstop to  EXT-15
+ E0 opto endstop to EXT-17
+ E1 opto endstop to EXT-19
