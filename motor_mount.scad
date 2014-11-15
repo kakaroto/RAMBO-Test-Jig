@@ -54,22 +54,39 @@ module nema_17_mount()
 	      cube([wall_thickness*2, wall_thickness * 4, wall_thickness]);
 	  }
 
-
-	  //front left mount hole
-	  translate([x1, y1, 0])
-	    cylinder(r=MOUNT_SCREW_RADIUS, h=wall_thickness);
+          if (MOTOR_MOUNT_USE_HEATSET_INSERTS) {
+	      //front left mount hole
+	      translate([x1, y1, 0])
+	      cylinder(r=M3_HEATSET_RADIUS, h=wall_thickness);
 			
-	  //front right mount hole
-	  translate([x2, y2, 0])
-	    cylinder(r=MOUNT_SCREW_RADIUS, h=wall_thickness);
+	      //front right mount hole
+	      translate([x2, y2, 0])
+	      cylinder(r=M3_HEATSET_RADIUS, h=wall_thickness);
 			
-	  //rear left mount hole
-	  translate([x3, y3, 0])
-	    cylinder(r=MOUNT_SCREW_RADIUS, h=wall_thickness);
+	      //rear left mount hole
+	      translate([x3, y3, 0])
+	      cylinder(r=M3_HEATSET_RADIUS, h=wall_thickness);
 			
-	  //rear right mount hole
-	  translate([x4, y4, 0])
-	    cylinder(r=MOUNT_SCREW_RADIUS, h=wall_thickness);
+	      //rear right mount hole
+	      translate([x4, y4, 0])
+	      cylinder(r=M3_HEATSET_RADIUS, h=wall_thickness);
+          } else {
+	      //front left mount hole
+	      translate([x1, y1, 0])
+	      cylinder(r=MOUNT_SCREW_RADIUS, h=wall_thickness);
+			
+	      //front right mount hole
+	      translate([x2, y2, 0])
+	      cylinder(r=MOUNT_SCREW_RADIUS, h=wall_thickness);
+			
+	      //rear left mount hole
+	      translate([x3, y3, 0])
+	      cylinder(r=MOUNT_SCREW_RADIUS, h=wall_thickness);
+			
+	      //rear right mount hole
+	      translate([x4, y4, 0])
+	      cylinder(r=MOUNT_SCREW_RADIUS, h=wall_thickness);
+          }
 			
 	  //nema 17 mount
 	  rotate([90, 0, 0])

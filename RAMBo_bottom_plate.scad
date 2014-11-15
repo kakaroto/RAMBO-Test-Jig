@@ -1,5 +1,6 @@
 include <common.scad>;
 
-board_thickness = 4.0;
-hole_size = 1.65;
-RAMBo1_1(); //Show module
+color("green") RAMBo(1.0, 1.5); //Show bottom
+    
+translate([0, 0, 1.0])
+      RAMBo(4.5, 1.65); //Show top module

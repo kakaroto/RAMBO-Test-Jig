@@ -1,8 +1,5 @@
 include <common.scad>;
 
-board_thickness=1.6;
-hole_size=1.55;
-
 CORNER_HOLES=1;
 MOTOR_X=1;
 MOTOR_Y=1;
@@ -41,6 +38,7 @@ EXT2=1;
 32U2_EXT=1;
 PWM_EXT=1;
 USB_PINS=1;
+USB_PINS_2_5_MM=0;
 USB_MOUNT=1;
 12V_AUX=1;
 5V_AUX=1;
@@ -53,8 +51,9 @@ EXTRA_PINS1=1;
 EXTRA_PINS2=1;
 EXTRA_PINS3=1;
 VREFS=0;
+VREFS_EXTRA=0;
 
-module RAMBo1_1(){
+module RAMBo1_1(board_thickness, hole_size){
 	board_size = [104.140000,102.870000];
 	union(){
 		color("red") linear_extrude(height=board_thickness,center=false, convexity=10) difference(){
@@ -88,6 +87,12 @@ module RAMBo1_1(){
 			  translate([11.060,59.670])hole(r=hole_size); //PN61729 2
 			  translate([9.060,59.670])hole(r=hole_size); //PN61729 3
 			  translate([9.060,57.170])hole(r=hole_size); //PN61729 4
+			}
+			if (USB_PINS_2_5_MM) {
+				translate([11.310,57.170])hole(r=hole_size); //package hole
+				translate([11.310,59.670])hole(r=hole_size); //package hole
+				translate([8.810,59.670])hole(r=hole_size); //package hole
+				translate([8.810,57.170])hole(r=hole_size); //package hole
 			}
 			if (USB_MOUNT) {
 			  translate([6.350,64.420])hole(r=hole_size); //PN61729 P$1
@@ -378,13 +383,372 @@ module RAMBo1_1(){
 	}
 }
 
-module RAMBo1_2() {
-  // TODO
+module RAMBo1_3(board_thickness, hole_size) {
+	board_size = [104.140000,102.870000];
+	union(){
+		color("red")linear_extrude(height=board_thickness,center=false, convexity=10)difference(){
+			square(board_size); //Board
+			if (CORNER_HOLES) {
+                translate([3.810,3.810])poly_circle(r=M3_RADIUS); //hole
+                translate([100.330,3.810])poly_circle(r=M3_RADIUS); //hole
+                translate([3.810,99.060])poly_circle(r=M3_RADIUS); //hole
+                translate([100.330,99.060])poly_circle(r=M3_RADIUS); //hole
+            }
+			if (RESET) {
+				translate([2.184,81.890])hole(r=hole_size); //package hole
+				translate([2.184,77.368])hole(r=hole_size); //package hole
+				translate([4.674,83.134])hole(r=hole_size); //package hole
+				translate([4.674,76.124])hole(r=hole_size); //package hole
+			}
+			if (VREFS) {
+				// XREF
+				translate([8.001,25.273])hole(r=hole_size); //package hole
+				// YREF
+				translate([28.280,25.622])hole(r=hole_size); //package hole
+				// ZREF
+				translate([48.451,25.241])hole(r=hole_size); //package hole
+				// E0REF
+				translate([64.594,25.665])hole(r=hole_size); //package hole
+				// E1REF
+				translate([83.245,25.546])hole(r=hole_size); //package hole
+			}
+			if (VREFS_EXTRA) {
+				// XDIR
+				translate([8.028,27.669])hole(r=hole_size); //package hole
+				// XSTEP
+				translate([10.760,25.789])hole(r=hole_size); //package hole
+				// XEN
+				translate([22.588,25.425])hole(r=hole_size); //package hole
+				// YDIR
+				translate([25.576,26.507])hole(r=hole_size); //package hole
+				// YSTEP
+				translate([25.559,29.464])hole(r=hole_size); //package hole
+				// YEN
+				translate([40.674,27.372])hole(r=hole_size); //package hole
+				// ZSTEP
+				translate([46.009,26.012])hole(r=hole_size); //package hole
+				// ZDIR
+				translate([43.234,25.594])hole(r=hole_size); //package hole
+				// ZEN
+				translate([58.960,26.289])hole(r=hole_size); //package hole
+				// E0DIR
+				translate([62.833,27.432])hole(r=hole_size); //package hole
+				// E0STEP
+				translate([66.521,25.390])hole(r=hole_size); //package hole
+				// E0EN
+				translate([78.169,26.035])hole(r=hole_size); //package hole
+				// E1DIR
+				translate([79.493,30.258])hole(r=hole_size); //package hole
+				// E1STEP
+				translate([80.859,26.251])hole(r=hole_size); //package hole
+				// E1EN
+				translate([97.073,17.716])hole(r=hole_size); //package hole
+			}
+			if (GND) {
+				translate([101.990,93.120])hole(r=hole_size); //package hole
+			}
+			if (5V_AUX) {
+				translate([3.016,91.916])hole(r=hole_size); //package hole
+				translate([5.556,91.916])hole(r=hole_size); //package hole
+			}
+			if (USB_PINS) {
+				translate([11.060,57.170])hole(r=hole_size); //package hole
+				translate([11.060,59.670])hole(r=hole_size); //package hole
+				translate([9.060,59.670])hole(r=hole_size); //package hole
+				translate([9.060,57.170])hole(r=hole_size); //package hole
+			}
+			if (USB_PINS_2_5_MM) {
+				translate([11.310,57.170])hole(r=hole_size); //package hole
+				translate([11.310,59.670])hole(r=hole_size); //package hole
+				translate([8.810,59.670])hole(r=hole_size); //package hole
+				translate([8.810,57.170])hole(r=hole_size); //package hole
+			}
+			if (USB_MOUNT) {
+				translate([6.350,64.420])hole(r=hole_size); //package hole
+				translate([6.350,52.420])hole(r=hole_size); //package hole
+			}
+			if (MOTOR_Y) {
+				translate([34.223,3.378])hole(r=hole_size); //package hole
+				translate([31.683,3.378])hole(r=hole_size); //package hole
+				translate([29.143,3.378])hole(r=hole_size); //package hole
+				translate([26.603,3.378])hole(r=hole_size); //package hole
+			}
+			if (PS_ON) {
+				translate([93.273,51.863])hole(r=hole_size); //package hole
+				translate([93.273,54.403])hole(r=hole_size); //package hole
+			}
+			if (MOTOR_E0) {
+				translate([77.403,3.378])hole(r=hole_size); //package hole
+				translate([74.862,3.378])hole(r=hole_size); //package hole
+				translate([72.323,3.378])hole(r=hole_size); //package hole
+				translate([69.782,3.378])hole(r=hole_size); //package hole
+			}
+			if (MOTOR_E1) {
+				translate([92.642,3.378])hole(r=hole_size); //package hole
+				translate([90.103,3.378])hole(r=hole_size); //package hole
+				translate([87.562,3.378])hole(r=hole_size); //package hole
+				translate([85.023,3.378])hole(r=hole_size); //package hole
+			}
+			if (MOTOR_X) {
+				translate([19.050,3.378])hole(r=hole_size); //package hole
+				translate([16.510,3.378])hole(r=hole_size); //package hole
+				translate([13.970,3.378])hole(r=hole_size); //package hole
+				translate([11.430,3.378])hole(r=hole_size); //package hole
+			}
+			if (MOSFET_FAN2) {
+				translate([41.720,81.788])hole(r=hole_size); //package hole
+				translate([44.260,81.788])hole(r=hole_size); //package hole
+			}
+			if (I2C) {
+				translate([33.953,36.830])hole(r=hole_size); //package hole
+				translate([36.492,36.830])hole(r=hole_size); //package hole
+				translate([39.032,36.830])hole(r=hole_size); //package hole
+				translate([41.573,36.830])hole(r=hole_size); //package hole
+			}
+			if (MOSFET_HEAT0) {
+				translate([11.430,93.980])hole(r=hole_size); //package hole
+				translate([16.510,93.980])hole(r=hole_size); //package hole
+			}
+			if (MOSFET_FAN0) {
+				translate([21.590,93.980])hole(r=hole_size); //package hole
+				translate([26.670,93.980])hole(r=hole_size); //package hole
+			}
+			if (MOSFET_HEAT1) {
+				translate([31.750,93.980])hole(r=hole_size); //package hole
+				translate([36.830,93.980])hole(r=hole_size); //package hole
+			}
+			if (MOSFET_FAN1) {
+				translate([41.910,93.980])hole(r=hole_size); //package hole
+				translate([46.990,93.980])hole(r=hole_size); //package hole
+			}
+			if (MOSFET_HEAT_BED) {
+				translate([52.070,93.980])hole(r=hole_size); //package hole
+				translate([57.150,93.980])hole(r=hole_size); //package hole
+			}
+			if (SPI) {
+				translate([47.943,42.545])hole(r=hole_size); //package hole
+				translate([47.943,45.085])hole(r=hole_size); //package hole
+				translate([50.483,42.545])hole(r=hole_size); //package hole
+				translate([50.483,45.085])hole(r=hole_size); //package hole
+				translate([53.023,42.545])hole(r=hole_size); //package hole
+				translate([53.023,45.085])hole(r=hole_size); //package hole
+				translate([55.562,42.545])hole(r=hole_size); //package hole
+				translate([55.562,45.085])hole(r=hole_size); //package hole
+			}
+			if (EXT2) {
+				translate([67.201,64.953])hole(r=hole_size); //package hole
+				translate([67.201,67.493])hole(r=hole_size); //package hole
+				translate([69.740,64.953])hole(r=hole_size); //package hole
+				translate([69.740,67.493])hole(r=hole_size); //package hole
+				translate([72.281,64.953])hole(r=hole_size); //package hole
+				translate([72.281,67.493])hole(r=hole_size); //package hole
+				translate([74.821,64.953])hole(r=hole_size); //package hole
+				translate([74.821,67.493])hole(r=hole_size); //package hole
+				translate([77.361,64.953])hole(r=hole_size); //package hole
+				translate([77.361,67.493])hole(r=hole_size); //package hole
+				translate([79.901,64.953])hole(r=hole_size); //package hole
+				translate([79.901,67.493])hole(r=hole_size); //package hole
+				translate([82.441,64.953])hole(r=hole_size); //package hole
+				translate([82.441,67.493])hole(r=hole_size); //package hole
+				translate([84.981,64.953])hole(r=hole_size); //package hole
+				translate([84.981,67.493])hole(r=hole_size); //package hole
+				translate([87.520,64.953])hole(r=hole_size); //package hole
+				translate([87.520,67.493])hole(r=hole_size); //package hole
+				translate([90.061,64.953])hole(r=hole_size); //package hole
+				translate([90.061,67.493])hole(r=hole_size); //package hole
+			}
+			if (MOTOR_Z1) {
+				translate([49.463,3.378])hole(r=hole_size); //package hole
+				translate([46.922,3.378])hole(r=hole_size); //package hole
+				translate([44.383,3.378])hole(r=hole_size); //package hole
+				translate([41.843,3.378])hole(r=hole_size); //package hole
+			}
+			if (MOTOR_Z2) {
+				translate([62.163,3.378])hole(r=hole_size); //package hole
+				translate([59.623,3.378])hole(r=hole_size); //package hole
+				translate([57.083,3.378])hole(r=hole_size); //package hole
+				translate([54.543,3.378])hole(r=hole_size); //package hole
+			}
+			if (32U2_EXT) {
+				translate([32.068,70.803])hole(r=hole_size); //package hole
+				translate([32.068,68.263])hole(r=hole_size); //package hole
+				translate([29.527,70.803])hole(r=hole_size); //package hole
+				translate([29.527,68.263])hole(r=hole_size); //package hole
+				translate([26.988,70.803])hole(r=hole_size); //package hole
+				translate([26.988,68.263])hole(r=hole_size); //package hole
+				translate([24.448,70.803])hole(r=hole_size); //package hole
+				translate([24.448,68.263])hole(r=hole_size); //package hole
+				translate([21.908,70.803])hole(r=hole_size); //package hole
+				translate([21.908,68.263])hole(r=hole_size); //package hole
+				translate([19.367,70.803])hole(r=hole_size); //package hole
+				translate([19.367,68.263])hole(r=hole_size); //package hole
+				translate([16.828,70.803])hole(r=hole_size); //package hole
+				translate([16.828,68.263])hole(r=hole_size); //package hole
+				translate([14.288,70.803])hole(r=hole_size); //package hole
+				translate([14.288,68.263])hole(r=hole_size); //package hole
+			}
+			
+			if (ICSP_M32U2) {
+				translate([27.750,60.135])hole(r=hole_size); //package hole
+				translate([27.750,62.675])hole(r=hole_size); //package hole
+				translate([30.290,60.135])hole(r=hole_size); //package hole
+				translate([30.290,62.675])hole(r=hole_size); //package hole
+				translate([32.830,60.135])hole(r=hole_size); //package hole
+				translate([32.830,62.675])hole(r=hole_size); //package hole
+			}
+			if (ICSP_M2560) {
+				translate([40.323,68.898])hole(r=hole_size); //package hole
+				translate([40.323,71.438])hole(r=hole_size); //package hole
+				translate([42.863,68.898])hole(r=hole_size); //package hole
+				translate([42.863,71.438])hole(r=hole_size); //package hole
+				translate([45.403,68.898])hole(r=hole_size); //package hole
+				translate([45.403,71.438])hole(r=hole_size); //package hole
+			}
+			if (MOTOR_EXT1) {
+				translate([68.707,34.941])hole(r=hole_size); //package hole
+				translate([66.167,34.941])hole(r=hole_size); //package hole
+				translate([63.627,34.941])hole(r=hole_size); //package hole
+				translate([61.087,34.941])hole(r=hole_size); //package hole
+				translate([58.547,34.941])hole(r=hole_size); //package hole
+			}
+			if (ENDSTOP_ZMIN) {
+				translate([28.575,43.180])hole(r=hole_size); //package hole
+				if (ENDSTOP_POWER) {
+					translate([26.035,43.180])hole(r=hole_size); //package hole
+					translate([23.495,43.180])hole(r=hole_size); //package hole
+				}
+			}
+			if (ENDSTOP_YMIN) {
+				translate([18.415,43.180])hole(r=hole_size); //package hole
+				if (ENDSTOP_POWER) {
+					translate([15.875,43.180])hole(r=hole_size); //package hole
+					translate([13.335,43.180])hole(r=hole_size); //package hole
+				}
+			}
+			if (ENDSTOP_XMIN) {
+				translate([8.255,43.180])hole(r=hole_size); //package hole
+				if (ENDSTOP_POWER) {
+					translate([5.715,43.180])hole(r=hole_size); //package hole
+					translate([3.175,43.180])hole(r=hole_size); //package hole
+				}
+			}
+			if (ENDSTOP_ZMAX) {
+				translate([23.495,36.830])hole(r=hole_size); //package hole
+				if (ENDSTOP_POWER) {
+					translate([26.035,36.830])hole(r=hole_size); //package hole
+					translate([28.575,36.830])hole(r=hole_size); //package hole
+				}
+			}
+			if (ENDSTOP_YMAX) {
+				translate([13.335,36.830])hole(r=hole_size); //package hole
+				if (ENDSTOP_POWER) {
+					translate([15.875,36.830])hole(r=hole_size); //package hole
+					translate([18.415,36.830])hole(r=hole_size); //package hole
+				}
+			}
+			if (ENDSTOP_XMAX) {
+				translate([3.175,36.830])hole(r=hole_size); //package hole
+				if (ENDSTOP_POWER) {
+					translate([5.715,36.830])hole(r=hole_size); //package hole
+					translate([8.255,36.830])hole(r=hole_size); //package hole
+				}
+			}
+			if (THERMISTOR0) {
+				translate([87.413,60.203])hole(r=hole_size); //package hole
+				translate([87.413,57.663])hole(r=hole_size); //package hole
+			}
+			if (THERMISTOR1) {
+				translate([87.413,52.329])hole(r=hole_size); //package hole
+				translate([87.413,49.789])hole(r=hole_size); //package hole
+			}
+			if (THERMISTOR2) {
+				translate([87.413,44.455])hole(r=hole_size); //package hole
+				translate([87.413,41.915])hole(r=hole_size); //package hole
+			}
+			if (THERMISTOR3) {
+				translate([87.413,36.581])hole(r=hole_size); //package hole
+				translate([87.413,34.041])hole(r=hole_size); //package hole
+			}
+			if (12V_AUX) {
+				translate([100.888,13.646])hole(r=hole_size); //package hole
+				translate([100.888,11.106])hole(r=hole_size); //package hole
+			}
+			
+			if (MOTOR_EXT2) {
+				translate([68.707,37.480])hole(r=hole_size); //package hole
+				translate([66.167,37.480])hole(r=hole_size); //package hole
+				translate([63.627,37.480])hole(r=hole_size); //package hole
+				translate([61.087,37.480])hole(r=hole_size); //package hole
+				translate([58.547,37.480])hole(r=hole_size); //package hole
+			}
+			if (MOTOR_EXT3) {
+				translate([68.707,40.020])hole(r=hole_size); //package hole
+				translate([66.167,40.020])hole(r=hole_size); //package hole
+				translate([63.627,40.020])hole(r=hole_size); //package hole
+				translate([61.087,40.020])hole(r=hole_size); //package hole
+				translate([58.547,40.020])hole(r=hole_size); //package hole
+			}
+			if (VIN) {
+				translate([95.758,60.960])hole(r=hole_size); //package hole
+				translate([95.758,66.040])hole(r=hole_size); //package hole
+				translate([95.758,71.120])hole(r=hole_size); //package hole
+				translate([95.758,76.200])hole(r=hole_size); //package hole
+				translate([95.758,81.280])hole(r=hole_size); //package hole
+				translate([95.758,86.360])hole(r=hole_size); //package hole
+			}
+			if (PWM_EXT) {
+				translate([50.800,71.755])hole(r=hole_size); //package hole
+				translate([53.340,71.755])hole(r=hole_size); //package hole
+				translate([55.880,71.755])hole(r=hole_size); //package hole
+				translate([58.420,71.755])hole(r=hole_size); //package hole
+				translate([60.960,71.755])hole(r=hole_size); //package hole
+				translate([63.500,71.755])hole(r=hole_size); //package hole
+			}
+			if (EXTRA_PINS0) {
+				translate([17.780,86.360])hole(r=hole_size); //package hole
+				translate([20.320,86.360])hole(r=hole_size); //package hole
+			}
+			if (EXTRA_PINS1) {
+				translate([22.860,86.360])hole(r=hole_size); //package hole
+				translate([25.400,86.360])hole(r=hole_size); //package hole
+			}
+			if (EXTRA_PINS2) {
+				translate([27.940,86.360])hole(r=hole_size); //package hole
+				translate([30.480,86.360])hole(r=hole_size); //package hole
+			}
+			if (EXTRA_PINS3) {
+				translate([61.595,86.360])hole(r=hole_size); //package hole
+				translate([64.135,86.360])hole(r=hole_size); //package hole
+			}
+			if (SERIAL) {
+				translate([32.485,41.275])hole(r=hole_size); //package hole
+				translate([32.485,43.815])hole(r=hole_size); //package hole
+				translate([35.025,41.275])hole(r=hole_size); //package hole
+				translate([35.025,43.815])hole(r=hole_size); //package hole
+				translate([37.565,41.275])hole(r=hole_size); //package hole
+				translate([37.565,43.815])hole(r=hole_size); //package hole
+				translate([40.105,41.275])hole(r=hole_size); //package hole
+				translate([40.105,43.815])hole(r=hole_size); //package hole
+				translate([42.645,41.275])hole(r=hole_size); //package hole
+				translate([42.645,43.815])hole(r=hole_size); //package hole
+			}
+			if (ANALOG_EXT) {
+				translate([72.916,58.603])hole(r=hole_size); //package hole
+				translate([72.916,61.143])hole(r=hole_size); //package hole
+				translate([75.456,58.603])hole(r=hole_size); //package hole
+				translate([75.456,61.143])hole(r=hole_size); //package hole
+				translate([77.996,58.603])hole(r=hole_size); //package hole
+				translate([77.996,61.143])hole(r=hole_size); //package hole
+				translate([80.535,58.603])hole(r=hole_size); //package hole
+				translate([80.535,61.143])hole(r=hole_size); //package hole
+			}
+		}
+	}
 }
 
-module RAMBo() {
+module RAMBo(board_thickness=1.6, hole_size=1.55) {
   if (RAMBO_TYPE == "1.1")
-    RAMBo1_1();
-  else
-    RAMBo1_2();
+    RAMBo1_1(board_thickness, hole_size);
+  else if (RAMBO_TYPE == "1.3")
+    RAMBo1_3(board_thickness, hole_size);
 }
